@@ -1,0 +1,79 @@
+//Assignment 2 Question 2
+Include Irvine32.inc
+Include Macros.inc
+.data 
+arr DWORD 5 DUP(?) 
+.code 
+ MAIN PROC
+ mov ecx,LENGTHOF arr
+ mov ebx,0 
+ getInput:
+ mWrite " Enter element # " 
+ mov eax,ebx
+ inc eax 
+ call WriteDec 
+ mWrite " : " 
+ call ReadInt 
+ mov [arr+ebx*4],eax 
+ inc ebx 
+ loop getInput
+ call selectionSort 
+ mov ecx,LENGTHOF arr 
+ mov ebx,0 
+ printSortedArray: 
+ mov eax,[arr + ebx * 4] 
+ call WriteDec 
+ mWrite " " 
+ inc ebx 
+loop printSortedArray
+exit 
+MAIN ENDP 
+SWAP PROC
+push ebp 
+mov ebp,esp
+mov edx,[ebp + 8]
+push edx 
+mov eax,[arr + edx * 4] 
+mov edx,[ebp + 12] 
+xchg eax,[arr + edx * 4] 
+pop edx 
+mov [arr + edx * 4],eax 
+pop ebp 
+ret 8 
+SWAP ENDP 
+selectionSort PROC 
+LOCAL largest:DWORD,i:DWORD,j:DWORD
+mov ecx,LENGTHOF arr
+mov largest,0
+dec ecx 
+mov i,ecx 
+mov j,ecx 
+outerLoop: 
+mov ebx,i
+mov largest,ebx 
+push ecx 
+mov edx,i 
+mov j,edx 
+innerLoop: 
+dec j 
+mov edx,j 
+mov eax,[arr + edx * 4]
+mov edx,largest 
+mov ebx,[arr + edx * 4]
+cmp eax,ebx
+jg markNewMax
+jmp continueLoop 
+markNewMax:
+mov edx,j
+mov largest,edx 
+continueLoop:
+loop innerLoop
+push i
+push largest 
+call SWAP 
+pop ecx 
+dec i 
+loop outerLoop 
+ret 
+selectionSort ENDP 
+END MAIN

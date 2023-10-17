@@ -1,0 +1,63 @@
+//Assignment 2 Quesion 3
+Include Irvine32.inc 
+Include Macros.inc
+.data
+arr BYTE 10 DUP(?) 
+.code 
+ MAIN PROC 
+mov ecx,LENGTHOF arr 
+mov ebx,0 
+getInput: 
+mWrite "Enter value # "
+mov eax,ebx 
+ inc eax 
+ call WriteDec 
+mWrite " : " 
+call ReadInt
+mov [arr + ebx],al 
+inc ebx 
+ loop getInput
+mov esi,OFFSET arr
+mov ebx,LENGTHOF arr
+call bubbleSort
+mov ebx,0 
+mov ecx,LENGTHOF arr
+printArray:
+mov al,[arr + ebx] 
+call WriteDec 
+inc ebx 
+mWrite " " 
+loop printArray
+exit 
+ MAIN ENDP 
+ bubbleSort PROC 
+mov edi,esi
+mov ecx,ebx 
+dec ecx 
+mov ebx,0 
+mov eax,0 
+outerLoop: 
+push ecx 
+mov esi,edi 
+innerLoop: 
+mov al,[esi] 
+mov bl,[esi+ 1] 
+cmp al,bl 
+jg swapElements
+continueLoop: 
+ inc esi 
+ loop innerLoop 
+pop ecx 
+loop outerLoop
+jmp endProgram 
+ swapElements: 
+mov al,[esi] 
+mov bl,[esi + 1] 
+xchg al,bl 
+mov [esi],al 
+mov [esi + 1],bl 
+ jmp continueLoop 
+ endProgram: 
+ ret 8 
+ bubbleSort ENDP 
+ END MAIN
