@@ -1,0 +1,110 @@
+//LAB #03
+
+//Task 1:
+INCLUDE Irvine32.inc
+.data
+x DWORD 10
+y DWORD 20
+.code
+Main proc
+mov eax, x
+add eax, 1
+mov ebx, y
+sub ebx, 1
+add ebx, y
+mov x, eax
+sub x, ebx
+call dumpregs
+exit
+main endp
+end main
+
+
+//Task 2:
+
+INCLUDE Irvine32.inc
+.data
+val1 WORD 8
+val2 WORD 15
+val3 WORD 20
+.code
+main proc
+movzx eax, val2
+neg eax
+add eax, 7
+movzx ebx, val3
+sub eax, ebx
+add eax, val1
+call dumpregs
+exit
+main endp
+end main
+
+
+//Task 4:
+INCLUDE Irvine32.inc
+.data
+x WORD 10
+.code
+main proc
+mov ax, x
+imul ax, x
+call dumpregs
+exit
+main endp
+end main
+
+
+
+//Task 5:
+INCLUDE Irvine32.inc
+.data
+l WORD 5
+w WORD 12
+.code
+main proc
+mov ax, l
+imul ax, w
+call dumpregs
+exit
+main endp
+end main
+
+
+//Task 6:
+
+INCLUDE Irvine32.inc
+.data
+l WORD 8
+b WORD 15
+.code
+main proc
+mov ax, 1/2
+imul ax, l
+imul ax, b
+call dumpregs
+exit
+main endp
+end main
+
+
+//Task 7:
+INCLUDE Irvine32.inc
+.data
+val1 BYTE 10h
+val2 WORD 8000h
+val3 DWORD 0FFFFh
+val4 WORD 7FFFh
+.code
+main proc
+mov ax, val2
+inc ax
+sub eax, val3
+sub ax, val4
+add val2, 1        	  SF = 1; CF = 0
+add val4, 1		  OF = 1; SF = 1			
+call dumpregs
+exit
+main endp
+end main
+

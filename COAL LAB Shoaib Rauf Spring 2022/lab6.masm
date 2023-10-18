@@ -1,0 +1,109 @@
+//Task 1
+
+INCLUDE Irvine32.inc
+.data 
+prompt BYTE "Generating 20 random integers between 0 and 990",0
+.code
+MAIN PROC
+mov eax, black + (green*16)
+call SetTextColor
+call crlf
+call clrscr
+mov edx,OFFSET prompt
+call writeString
+call crlf
+mov eax,991
+mov ecx,20
+mov edx,0
+inc dh
+generate:
+call Gotoxy
+call RandomRange
+call WriteDec
+mov eax,5
+call delay
+mov eax,991
+call crlf
+add dh,1
+add dl,2
+loop generate
+exit
+MAIN ENDP
+END MAIN
+
+//Task 4
+
+INCLUDE Irvine32.inc
+BUFFER_SIZE = 501
+.data
+buffer BYTE BUFFER_SIZE DUP(?)
+filename BYTE "Fibo.txt",0
+fileHandle HANDLE ?
+stringLength DWORD ?
+bytesWritten DWORD ?
+str2 BYTE "Bytes written to file [Fibo.txt]:",0
+str3 BYTE "Enter up to 8 characters and press"
+BYTE "[Enter]: ",0dh,0ah,0
+.code
+main PROC
+; Create a new text file.
+mov edx,OFFSET filename
+call CreateOutputFile
+mov fileHandle,eax
+; Ask the user to input a string.
+mov edx,OFFSET str3 ; "Enter upto ...."
+call WriteString
+mov ecx,BUFFER_SIZE ; Input a string
+mov edx,OFFSET buffer
+call ReadString
+mov stringLength,eax ; counts chars entered
+; Write the buffer to the output file.
+mov eax,fileHandle
+mov edx,OFFSET buffer
+mov ecx,stringLength
+call WriteToFile
+mov bytesWritten,eax ; save return value
+call CloseFile
+; Display the return value.
+mov edx,OFFSET str2 ; "Bytes written"
+call WriteString
+mov eax,bytesWritten
+call WriteDec
+call Crlf
+exit
+main ENDP
+END main
+
+//Task 5
+INCLUDE Irvine32.inc
+.data 
+i DWORD 5
+j DWORD 6
+starsCount DWORD 1
+STARS DWORD "*",0
+.code
+MAIN PROC
+mainLoop:
+mov ecx,i
+mov ebx,ecx
+mov eax,j
+sub eax,starsCount
+mov ecx,eax
+spaceLoop:
+mov edx,OFFSET SPACE
+call WriteString
+LOOP spaceLoop
+mov ecx,starsCount
+starLoop:
+mov edx,OFFSET STARS
+call WriteString
+LOOP starLoop
+inc starsCount
+mov ecx,ebx
+dec i
+call crlf
+LOOP mainLoop
+exit
+MAIN ENDP
+END MAIN
+

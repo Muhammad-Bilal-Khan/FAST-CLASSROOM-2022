@@ -1,0 +1,97 @@
+//Task1
+
+Include Irvine.inc
+.data
+.code
+main proc
+mov ax, 47
+add ax, 39
+add ax, 60
+add ax, 85
+add ax, 64
+add ax, 54o
+sub ax, 0AH
+exit
+main endp
+end main
+
+//Task2
+
+Include Irvine32.inc
+.data
+.code
+main proc
+mov ax, 30
+sub ax, 9
+add ax, 186
+sub ax, 150
+call dumpregs
+exit
+main endp
+end main
+
+//Task3
+
+Include Irvine32.inc
+.data
+F DWORD?
+.code
+main proc
+mov eax, 101110
+add eax, 50AH + 6710d + 1010001 + F
+call Dumpregs
+exit
+main endp
+end main
+
+//Task4
+
+Include Irvine32.inc
+.data
+E DWORD?
+F DWORD?
+.code
+main proc
+mov eax, 10001101
+sub eax, D83h
+add eax, 385
+add eax, 10
+add eax, 1111101
+sub eax, E
+add eax, F
+CALL DumpRegs
+exit
+main endp
+end main
+
+//Task5
+
+Include Irvine32.inc
+.data
+.code
+main proc
+add edx, ebx
+add edx, 0AH-650 +73d + 1
+sub edx, ecx
+sub edx, eax
+CALL DumpRegs
+exit
+main endp
+end main
+
+//Task6
+
+Include Irvine32.inc
+.data
+.code
+main proc
+mov eax, 5ADh
+sub eax, eax
+mov ebx, 65o
+add ebx, 65d-11110111
+add ebx, 150
+mov eax, ebx
+CALL DumpRegs
+exit
+main endp
+end main

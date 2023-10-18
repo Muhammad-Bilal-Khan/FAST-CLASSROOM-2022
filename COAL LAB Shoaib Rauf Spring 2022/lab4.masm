@@ -1,0 +1,151 @@
+
+//Task1:
+
+TITLE QUESTION # 3
+INCLUDE Irvine32.inc
+.data
+Array DWORD 7,4,1,5,2
+.code
+MAIN PROC
+mov eax ,[Array + 8]
+mov ebx ,[Array]
+mov Array,eax
+mov [Array+8],ebx
+mov eax,[Array+16]
+mov ebx , [Array+4]
+mov [Array+4], eax
+mov [Array+16],ebx
+mov eax,[Array+16]
+mov ebx,[Array+8]
+mov [Array+8],eax
+mov [Array+16],ebx
+mov eax,[Array]
+call writeint
+mov eax,[Array+4]
+call writeint
+mov eax,[Array+8]
+call writeint
+mov eax,[Array+12]
+call writeint
+mov eax,[Array+16]
+call writeint
+exit
+MAIN ENDP
+END MAIN 
+
+
+
+
+
+
+//Task 2:
+
+
+INCLUDE Irvine32.inc
+.data
+arrayB BYTE 10,20,30
+arrayW WORD 150,250,350
+arrayD DWORD 600, 1200, 1800
+SUM1 DWORD ?
+SUM2 DWORD ?
+SUM3 DWORD ?
+.code
+MAIN PROC
+mov eax,0
+mov ebx,0
+movsx eax,arrayB
+movsx ebx,arrayW
+add eax,ebx
+add eax,arrayD
+mov SUM1,eax
+mov eax,0
+mov ebx,0
+movsx eax,[arrayB+1]
+movsx ebx,[arrayW+2]
+add eax,ebx
+add eax,[arrayD+4]
+mov SUM2,eax
+mov eax,0
+mov ebx,0
+movsx eax,[arrayB+2]
+movsx ebx,[arrayW+4]
+add eax,ebx
+add eax,[arrayD+8]
+mov SUM3,eax
+; Print Sum 1 
+mov eax,SUM1
+call writeInt
+; Print Sum 2 
+mov eax,SUM2
+call writeInt
+; Print Sum 3 
+mov eax,SUM3
+call writeInt
+exit
+MAIN ENDP
+END MAIN
+
+
+
+
+
+
+
+//sk 3:
+
+INCLUDE Irvine32.inc
+.data
+v SBYTE -101
+w SBYTE 121
+x SBYTE 22
+u SBYTE -70
+y SBYTE -12
+Z SBYTE ?
+
+.code
+main proc
+mov ah, x
+add ah, y
+add ah, w
+sub ah, v
+add ah, u
+mov Z, ah
+movzx eax, Z
+
+call writeint
+exit
+main endp
+end main
+
+
+//Task 4:
+
+INCLUDE Irvine32.inc
+.data 
+array1 BYTE 10,20,30,40
+array2 BYTE  DUP(?)
+.code
+MAIN PROC
+mov eax,0
+mov esi,OFFSET array1
+mov al,[esi+3]
+mov array2,al
+mov al,[esi+2]
+mov [array2+1],al
+mov al,[esi+1]
+mov [array2+2],al
+mov al,[esi]
+mov [array2+3],al
+; printing the reversed array
+mov al,array2
+call writeInt
+mov al,[array2+1]
+call writeInt
+mov al,[array2+2]
+call writeInt
+mov al,[array2+3]
+call writeInt
+exit
+MAIN ENDP
+END MAIN
+

@@ -1,0 +1,121 @@
+//Q1:
+
+INCLUDE Irvine32.inc
+.data
+	arrayB	BYTE 60, 70, 80
+	arrayW 	WORD 150, 250, 350
+	arrayD 	DWORD 600, 1200, 1800
+	sumB BYTE ?
+	sumW WORD ?
+
+
+.code
+	main PROC
+		mov eax,0
+		mov esi,0
+		mov al,arrayB[esi*TYPE arrayB]
+		add esi,2
+		add al,arrayB[esi*TYPE arrayB]
+		call DumpRegs
+
+		mov esi,0
+		mov ax,arrayW[esi*TYPE arrayW]
+		add esi,2
+		add ax,arrayW[esi*TYPE arrayW]
+		call DumpRegs
+
+		mov esi,0
+		mov eax,arrayD[esi*TYPE arrayD]
+		add esi,2
+		add eax,arrayD[esi*TYPE arrayD]
+		call DumpRegs
+	exit
+	main ENDP
+	END main
+
+
+//Q2:
+
+INCLUDE Irvine32.inc
+.data
+	arr DWORD 1000, 2000, 4000, 6000
+	ptrD dword OFFSET arr
+	ptrD1 dword OFFSET [arr+1]
+	ptrD2 dword OFFSET [arr+2]
+	ptrD3 dword OFFSET [arr+3]
+.code
+	main PROC
+		mov eax,0
+		mov eax,[ptrD]
+		mov ebx,0
+		mov ebx,[ptrD1]
+		call DumpRegs
+		mov eax,0
+		mov eax,[ptrD2]
+		mov ebx,0
+		mov ebx,[ptrD3]
+		call DumpRegs
+
+	exit
+	main ENDP
+	END main
+ 
+
+//Q3:
+
+INCLUDE Irvine32.inc
+.data
+	arr BYTE 1,2,3,4,5,6
+	s BYTE 6
+	.code
+main PROC
+		mov eax,0
+		movzx ecx,s
+		mov esi,OFFSET arr
+		L1:
+			mov al,[esi+ecx-1]
+			call WriteDec
+			call crlf
+			Loop L1
+	exit
+	main ENDP
+	END main
+ 
+
+
+
+//Q4:
+
+INCLUDE Irvine32.inc
+.data
+	b BYTE 1
+	a BYTE 1
+	s BYTE ?
+	
+.code
+	main PROC
+		mov eax,0
+		mov al,a
+		Call WriteDec
+		Call crlf
+		mov bl,b
+		Call WriteDec
+		call crlf
+		mov ecx,8
+		L1:
+			add al,bl
+			Call WriteDec
+			call crlf
+			mov dl,al
+			mov s,dl
+			mov a,bl
+			mov al,a
+			mov b,dl
+			mov bl,b
+				loop L1
+		
+		
+
+	exit
+	main ENDP
+	END main
